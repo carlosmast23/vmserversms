@@ -10,7 +10,7 @@
 Si deseas mas información puedes contarte a  **carlosmast2301@gmail.com** o enviarme un mensaje a [codesoft](http://www.codesoft-ec.com/ "codesoft")
 ***
 
-##Índice
+## Índice
 1. Introducción
 2. Instalación y Configuración 
 3. Ejemplos
@@ -18,7 +18,7 @@ Si deseas mas información puedes contarte a  **carlosmast2301@gmail.com** o env
 8. Compatibilidad con Navegadores
 ***
 
-##1. Introducción
+## 1. Introducción
 
 El objetivo general del aplicativo es proporcionar un web service en php que permita establecer la conexión con dispositivo Android por sockets. 
 
