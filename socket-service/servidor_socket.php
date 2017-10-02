@@ -30,18 +30,16 @@ while(true)
 		case 1:
 			echo "Conexión aceptada!\n\n";
 			$conn = @socket_accept($socket);
-			$numero= socket_read($conn, 2048); //lee el numero al cual enviar el mensaje
+			$numero= socket_read($conn, 1024, PHP_NORMAL_READ); //lee el numero al cual enviar el mensaje
 			//echo "numero leido \n";
 			socket_write($conn," ");	//enviar una valor centella		
 			//socket_write($conn,"");
 			//echo "valor escrito \n";
-			$mensaje= socket_read($conn, 2048); //mensaje a enviar por el servidor de aplicaciones
-			//echo "valor leido \n";
-			
-			socket_write($connCelular,$numero);	
-			socket_read($connCelular, 2048);			
-			socket_write($connCelular,$mensaje);			
-			echo "num: ".$numero." men: ".$mensaje."\n\n";
+			$mensaje= socket_read($conn, 1024, PHP_NORMAL_READ); //mensaje a enviar por el servidor de aplicaciones
+			//echo "valor leido \n";			
+			socket_write($connCelular,$numero,1024);				
+			socket_write($connCelular,$mensaje,1024);			
+			echo "numero:".$numero."\nmensaje:".$mensaje."\n\n";
 			break;
 		case 0:
 			echo "Tiempo de espera excedido!\n\n";
