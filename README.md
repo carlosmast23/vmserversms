@@ -1,4 +1,4 @@
-## SERVIDOR SMS PHP
+##SERVIDOR SMS PHP
 
 ***
 *Nombre del Tema:* Introducción
@@ -21,6 +21,17 @@ Si deseas mas información puedes contarte a  **carlosmast2301@gmail.com** o env
 ## 1. Introducción
 
 El objetivo general del aplicativo es proporcionar un web service en php que permita establecer la conexión con dispositivo Android por sockets. 
+
+## 2. Instalación y Configuración
+
+### Iniciar el Servicio
+**Windows:** Abrir un cmd y ejecutar el siguiente comando
+
+    C:/xampp/php/php.exe -q C:/xampp/htdocs/vmserversms/socket-service/servidor_socket.php
+
+**Linux:** Abrir un terminal y ejecutar el siguiente comando
+    
+    Php /var/www/vm/Public_html/servidor_socket.php
 
 ### Otros
 Manual para crear datos :https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
