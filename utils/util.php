@@ -17,7 +17,7 @@ class Constants
  */
 function escribir_log($cadena,$tipo)
 {
-	$arch = fopen(getRootPath(1)."/logs/logsms".date("Y-m-d").".txt", "a+"); 
+	$arch = fopen(getRootPath(1)."/logs/logsms".date("Y-m-d").".log", "a+"); 
 	$message="[".date("Y-m-d H:i:s")." - $tipo ] ".$cadena."\n";
 	//Imprimir los mensajes en la consola
 	echo $message; 
@@ -28,7 +28,7 @@ function escribir_log($cadena,$tipo)
  
 function escribir_log_normal($cadena,$tipo)
 {
-	$arch = fopen("../logs/logwebservice".date("Y-m-d").".txt", "a+"); 
+	$arch = fopen("../logs/logwebservice".date("Y-m-d").".log", "a+"); 
 	$message="[".date("Y-m-d H:i:s")." - $tipo ] ".$cadena."\n";
 	//Imprimir los mensajes en la consola
 	//echo $message; 
