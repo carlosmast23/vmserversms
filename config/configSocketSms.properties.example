@@ -1,0 +1,5 @@
+address_socket_phone=0.0.0.0
+puerto_socket_phone=5000
+address_socket_webservice=127.0.0.1
+puerto_socket_webservice=65500
+max_read_byte=1024
