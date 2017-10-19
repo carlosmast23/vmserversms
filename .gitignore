@@ -1,0 +1,7 @@
+
+#CONFIGURACIONES PERSONALIZADAS
+
+logs/*.php
+
+config/configSocketSms.properties
+config/configWebService.properties
