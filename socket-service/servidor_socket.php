@@ -74,28 +74,38 @@ while(true)
 					//socket_write($conn," ");	//enviar una valor centella		
 					$mensaje= socket_read($conn, $max_read_byte, PHP_NORMAL_READ); //mensaje a enviar por el servidor de aplicaciones
 					
-
+					//Enivar el numero de celular
 					 if(socket_write($connCelular,$numero,$max_read_byte)=== false)
 					 {	
 					 	$error=sprintf( "No se puede escribir %s", socket_strerror( socket_last_error() ) );
 					 	//escribir_log("Warn",$error);
 					 	throw new Exception( $error); 	
 					 }
-							
+					 else
+					 {
+					 	//Enviar el mensaje del celular
+					 	if(socket_write($connCelular,$mensaje,$max_read_byte)==false)
+						{
+							$error=sprintf( "No se puede escribir %s", socket_strerror( socket_last_error() ) );
+							//escribir_log("Warn",$error);
+						 	throw new Exception( $error); 	
+						}
 
-					if(socket_write($connCelular,$mensaje,$max_read_byte)==false)
-					{
-						$error=sprintf( "No se puede escribir %s", socket_strerror( socket_last_error() ) );
-						//escribir_log("Warn",$error);
-					 	throw new Exception( $error); 	
-					}
+					 }
+
+					//Se enviaron los 2 mensajes del numero y el texto correctamente
+					escribir_log("Info","Enviando resupuesta al web service");
+					socket_write($conn,"success"."\n",$max_read_byte);
+					escribir_log("Info","Recibido resupuesta del web service");
+					escribir_log("Info","Terminando enviar resupuesta al web service");
+ 
 
 					escribir_log("Info","numero:".trim($numero).", mensaje:".trim($mensaje));
 				}
 			}catch(Exception $e)
 			{
 				$error=sprintf( "Error con la comunicacion: ", $e->getLine() ) . $e->getMessage();
-				escribir_log("Error",$error);
+				socket_write($conn,"error"."\n",$max_read_byte);
 				socket_close($conn);
 			}
 		break;
