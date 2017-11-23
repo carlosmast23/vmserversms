@@ -1,42 +1,37 @@
 <?php
-    require_once "../lib/nusoap.php";
-    $cliente = new nusoap_client("http://localhost/vmserversms/web-service/server-sms.php");
-    echo "iniciado ...";
-    $error = $cliente->getError();
-    if ($error) {
-        echo "<h2>Constructor error</h2><pre>" . $error . "</pre>";
-    }
+
+   	$properties = parse_ini_file('../config/configWebService.properties');
+   	$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+   	$host = $properties["host"];
+	$puerto =$properties["puerto"];
+	$connect_socket=socket_connect($socket, $host, $puerto);
 
 
-	$result = $cliente->call("enviarSMS",array("593983528439","mensaje pruebass"));
+	$numero="+593997426212";
+	$mensaje="mensaje pruebass";
 
-    if($result)
-    {
-        switch ($result) {
-            case "success":
-                echo "el mesaje se envio correctamente";
-                break;
-            case "noservicesms":
-                echo "el servidor de sockets esta fuera de servicio";
-                break;
-            case "notconnection":
-                echo "el servidor de socket no permite conectar por el socket";
-                break;
-            case "unknown":
-                echo "error desconocido";
-                break;
-            default:
-                echo "error sin clasificar";
-        }
+	if ($connect_socket)
+		{	
+			echo("Conectado correctamente con el servidorsms ..."."Info");
+			socket_write($socket,$numero."\n");
+			//socket_read($socket, 2048);
+			socket_write($socket,$mensaje."\n");
 
-        echo "";
-    }
-    else
-    {
-        echo "</br>Error de conexion";
-    }
+			//Leer el estado del envio
+			$respuesta=socket_read($socket, 1024);
+			if(strcmp (trim($respuesta),"success")  != 0)
+			{
+				return "No hay conexion con el celular";
+			}			
+			socket_close($socket);
+			echo ("enviado mensaje al servidor {".$numero.":".$mensaje."}"."Info");
 
-
-	
+		}
+		else
+		{
+			$error='Error : '.socket_strerror(socket_last_error());
+		    echo ($error."Error");
+			socket_close($socket);
+		}
 
 ?>
